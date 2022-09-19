@@ -76,14 +76,18 @@ def Browser(*args, **kwargs):  # NOQA N802
     """Emulate splinter's Browser."""
     visit_condition = kwargs.pop("visit_condition")
     visit_condition_timeout = kwargs.pop("visit_condition_timeout")
+    logging.info('About to call the browser')
     browser = splinter.Browser(*args, retry_count=6, **kwargs)
+    logging.info('About to call functool')
     browser.wait_for_condition = functools.partial(
         _wait_for_condition, browser)
     if hasattr(browser, "driver"):
         browser.visit_condition = visit_condition
         browser.visit_condition_timeout = visit_condition_timeout
+        logging.info('About to visit browser')
         browser.visit = functools.partial(_visit, browser, browser.visit)
     browser.__splinter_browser__ = True
+    logging.info('About to return the Browser method')
     return browser
 
 
