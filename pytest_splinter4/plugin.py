@@ -72,12 +72,12 @@ html: {screenshot_html_file_name}
 """
 
 
-def Browser(driver_name: str = "firefox", *args, **kwargs):  # NOQA N802
+def Browser(*args, **kwargs):  # NOQA N802
     """Emulate splinter's Browser."""
     visit_condition = kwargs.pop("visit_condition")
     visit_condition_timeout = kwargs.pop("visit_condition_timeout")
     LOGGER.info('About to call the browser')
-    browser = splinter.Browser(driver_name="chrome", *args, retry_count=6, **kwargs)
+    browser = splinter.Browser(*args, retry_count=15, **kwargs)
     LOGGER.info('About to call functool')
     browser.wait_for_condition = functools.partial(
         _wait_for_condition, browser)
