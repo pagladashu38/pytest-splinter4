@@ -360,7 +360,7 @@ def browser_pool(request, splinter_close_browser):
 def browser_patches():
     """Browser monkey patches."""
     patch_webdriver()
-    # patch_webdriverelement()
+    patch_webdriverelement()
 
 
 @pytest.fixture(scope="session")
